@@ -1,0 +1,317 @@
+<?xml version="1.0" ?>
+<wsdl:definitions name="vendorDDIService" targetNamespace="http://vendorDDI.sinopharm_gz.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://vendorDDI.sinopharm_gz.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://vendorDDI.sinopharm_gz.com/" xmlns:tns="http://vendorDDI.sinopharm_gz.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryReq" type="tns:QueryReq"></xs:element>
+  <xs:element name="getPurchaseInfoResponse" type="tns:getPurchaseInfoResponse"></xs:element>
+  <xs:element name="getRealTimeStockInfoResponse" type="tns:getRealTimeStockInfoResponse"></xs:element>
+  <xs:element name="getSaleInfoResponse" type="tns:getSaleInfoResponse"></xs:element>
+  <xs:element name="getStockInfoResponse" type="tns:getStockInfoResponse"></xs:element>
+  <xs:element name="getVersionResponse" type="tns:getVersionResponse"></xs:element>
+  <xs:complexType name="QueryStockReq">
+    <xs:sequence>
+      <xs:element name="customID" type="xs:string"></xs:element>
+      <xs:element name="accessID" type="xs:string"></xs:element>
+      <xs:element name="accessPasswords" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStockInfoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:StockInfo"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockInfo">
+    <xs:complexContent>
+      <xs:extension base="tns:SkuDto">
+        <xs:sequence>
+          <xs:element name="stockQty" type="xs:decimal"></xs:element>
+          <xs:element name="validDate" type="xs:string"></xs:element>
+          <xs:element name="produceDate" type="xs:string"></xs:element>
+          <xs:element name="ownerID" type="xs:string"></xs:element>
+          <xs:element name="quaStatus" type="xs:string"></xs:element>
+          <xs:element name="stockStatus" type="xs:string"></xs:element>
+          <xs:element name="ownerName" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SkuDto">
+    <xs:sequence>
+      <xs:element name="productCode" type="xs:string"></xs:element>
+      <xs:element name="productName" type="xs:string"></xs:element>
+      <xs:element name="producer" type="xs:string"></xs:element>
+      <xs:element name="productSpec" type="xs:string"></xs:element>
+      <xs:element name="productUnit" type="xs:string"></xs:element>
+      <xs:element name="productBatch" type="xs:string"></xs:element>
+      <xs:element name="productClass" type="xs:string"></xs:element>
+      <xs:element name="packetNum" type="xs:int"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="number">
+    <xs:sequence></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DDISoaFault">
+    <xs:sequence>
+      <xs:element name="errCode" type="xs:int"></xs:element>
+      <xs:element name="message" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryReq">
+    <xs:sequence>
+      <xs:element name="customID" type="xs:string"></xs:element>
+      <xs:element name="startDate" type="xs:string"></xs:element>
+      <xs:element name="endDate" type="xs:string"></xs:element>
+      <xs:element name="accessID" type="xs:string"></xs:element>
+      <xs:element name="accessPasswords" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPurchaseInfoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:PurchaseInfo"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PurchaseInfo">
+    <xs:complexContent>
+      <xs:extension base="tns:SkuDto">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"></xs:element>
+          <xs:element name="produceDate" type="xs:string"></xs:element>
+          <xs:element name="validDate" type="xs:string"></xs:element>
+          <xs:element name="billNo" type="xs:string"></xs:element>
+          <xs:element name="flowName" type="xs:string"></xs:element>
+          <xs:element name="createDate" type="xs:string"></xs:element>
+          <xs:element name="ownerID" type="xs:string"></xs:element>
+          <xs:element name="deptName" type="xs:string"></xs:element>
+          <xs:element name="venderCode" type="xs:string"></xs:element>
+          <xs:element name="venderName" type="xs:string"></xs:element>
+          <xs:element name="excuteQty" type="xs:decimal"></xs:element>
+          <xs:element name="price" type="xs:decimal"></xs:element>
+          <xs:element name="netPrice" type="xs:decimal"></xs:element>
+          <xs:element name="value" type="xs:decimal"></xs:element>
+          <xs:element name="netValue" type="xs:decimal"></xs:element>
+          <xs:element name="stockStatus" type="xs:string"></xs:element>
+          <xs:element name="quaStatus" type="xs:string"></xs:element>
+          <xs:element name="ownerName" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="getRealTimeStockInfoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:StockInfo"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSaleInfoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:SaleInfo"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaleInfo">
+    <xs:complexContent>
+      <xs:extension base="tns:SkuDto">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"></xs:element>
+          <xs:element name="billNo" type="xs:string"></xs:element>
+          <xs:element name="flowName" type="xs:string"></xs:element>
+          <xs:element name="ownerID" type="xs:string"></xs:element>
+          <xs:element name="deptName" type="xs:string"></xs:element>
+          <xs:element name="saleDate" type="xs:string"></xs:element>
+          <xs:element name="releaseDate" type="xs:string"></xs:element>
+          <xs:element name="transitDate" type="xs:string"></xs:element>
+          <xs:element name="invoiceNo" type="xs:string"></xs:element>
+          <xs:element name="invoiceDate" type="xs:string"></xs:element>
+          <xs:element name="venderCode" type="xs:string"></xs:element>
+          <xs:element name="venderName" type="xs:string"></xs:element>
+          <xs:element name="customerCode" type="xs:string"></xs:element>
+          <xs:element name="customerName" type="xs:string"></xs:element>
+          <xs:element name="customerArea" type="xs:string"></xs:element>
+          <xs:element name="customerType" type="xs:string"></xs:element>
+          <xs:element name="transAddrCode" type="xs:string"></xs:element>
+          <xs:element name="transAddr" type="xs:string"></xs:element>
+          <xs:element name="transMode" type="xs:string"></xs:element>
+          <xs:element name="excuteQty" type="xs:decimal"></xs:element>
+          <xs:element name="price" type="xs:decimal"></xs:element>
+          <xs:element name="netPrice" type="xs:decimal"></xs:element>
+          <xs:element name="value" type="xs:decimal"></xs:element>
+          <xs:element name="netValue" type="xs:decimal"></xs:element>
+          <xs:element name="ownerName" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetVersionReq">
+    <xs:sequence>
+      <xs:element name="accessID" type="xs:string"></xs:element>
+      <xs:element name="accessPasswords" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getVersionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="getStockInfo" nillable="true" type="tns:QueryStockReq"></xs:element>
+  <xs:element name="DDISoaFault" nillable="true" type="tns:DDISoaFault"></xs:element>
+  <xs:element name="getPurchaseInfo" nillable="true" type="tns:QueryReq"></xs:element>
+  <xs:element name="getRealTimeStockInfo" nillable="true" type="tns:QueryStockReq"></xs:element>
+  <xs:element name="getSaleInfo" nillable="true" type="tns:QueryReq"></xs:element>
+  <xs:element name="getVersion" nillable="true" type="tns:GetVersionReq"></xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getSaleInfo">
+    <wsdl:part element="tns:getSaleInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSaleInfoResponse">
+    <wsdl:part element="tns:getSaleInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStockInfo">
+    <wsdl:part element="tns:getStockInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStockInfoResponse">
+    <wsdl:part element="tns:getStockInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersion">
+    <wsdl:part element="tns:getVersion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part element="tns:getVersionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRealTimeStockInfo">
+    <wsdl:part element="tns:getRealTimeStockInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DDISoaException">
+    <wsdl:part element="tns:DDISoaFault" name="DDISoaException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRealTimeStockInfoResponse">
+    <wsdl:part element="tns:getRealTimeStockInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPurchaseInfo">
+    <wsdl:part element="tns:getPurchaseInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPurchaseInfoResponse">
+    <wsdl:part element="tns:getPurchaseInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="vendorService">
+    <wsdl:operation name="getStockInfo">
+      <wsdl:input message="tns:getStockInfo" name="getStockInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getStockInfoResponse" name="getStockInfoResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:DDISoaException" name="DDISoaException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPurchaseInfo">
+      <wsdl:input message="tns:getPurchaseInfo" name="getPurchaseInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getPurchaseInfoResponse" name="getPurchaseInfoResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:DDISoaException" name="DDISoaException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRealTimeStockInfo">
+      <wsdl:input message="tns:getRealTimeStockInfo" name="getRealTimeStockInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getRealTimeStockInfoResponse" name="getRealTimeStockInfoResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:DDISoaException" name="DDISoaException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSaleInfo">
+      <wsdl:input message="tns:getSaleInfo" name="getSaleInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getSaleInfoResponse" name="getSaleInfoResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:DDISoaException" name="DDISoaException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input message="tns:getVersion" name="getVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getVersionResponse" name="getVersionResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:DDISoaException" name="DDISoaException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="vendorDDIServiceSoapBinding" type="tns:vendorService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+    <wsdl:operation name="getStockInfo">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="getStockInfo">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="getStockInfoResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+      <wsdl:fault name="DDISoaException">
+        <soap:fault name="DDISoaException" use="literal"></soap:fault>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPurchaseInfo">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="getPurchaseInfo">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="getPurchaseInfoResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+      <wsdl:fault name="DDISoaException">
+        <soap:fault name="DDISoaException" use="literal"></soap:fault>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRealTimeStockInfo">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="getRealTimeStockInfo">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="getRealTimeStockInfoResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+      <wsdl:fault name="DDISoaException">
+        <soap:fault name="DDISoaException" use="literal"></soap:fault>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSaleInfo">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="getSaleInfo">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="getSaleInfoResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+      <wsdl:fault name="DDISoaException">
+        <soap:fault name="DDISoaException" use="literal"></soap:fault>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="getVersion">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+      <wsdl:fault name="DDISoaException">
+        <soap:fault name="DDISoaException" use="literal"></soap:fault>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="vendorDDIService">
+    <wsdl:port binding="tns:vendorDDIServiceSoapBinding" name="vendorDDIPort">
+      <soap:address location="http://59.41.111.229:9000/vendorService"></soap:address>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
